@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
@@ -37,33 +37,21 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('multilingual.index') }}">{{_('Home')}}
+                        <a class="nav-link" href="/">Home
                             <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('multilingual.editor') }}">{{_('Editor')}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                               id="dropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{_('Language')}}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item"
-                                   href="{{ url_for(request.endpoint, lang_code='en') }}">English</a>
-                                <a class="dropdown-item"
-                                   href="{{ url_for(request.endpoint, lang_code='fr') }}">Français</a>
-                            </div>
-                        </div>
+                        <a class="nav-link" href="/en/editor">Editor</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
-<section class="content h-100">
-    {% block content %}{% endblock %}
-</section>
+<body>
+<div class="body-content">
+    <h1>Error 404 / Erreur 404</h1>
+    <p>The page you are looking for does not exist. / La page que vous recherchez n'existe pas.</p>
+</div>
+</body>
 </html>

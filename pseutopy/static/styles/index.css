@@ -1,0 +1,29 @@
+html,
+body {
+    height: 100%;
+}
+
+.body-content {
+    margin-top: 1em;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.App-body {
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(2px + 2vmin);
+    color: black;
+    text-align: left;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}

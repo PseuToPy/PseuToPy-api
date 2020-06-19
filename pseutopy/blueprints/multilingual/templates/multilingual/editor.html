@@ -1,121 +1,252 @@
 {% extends 'base.html' %}
-{% block title %}{{_('Editor')}}{% endblock %}
+{% block title %}{{_('editor_title')}}{% endblock %}
 {% block content %}
-<div class="h-100 d-flex">
-  <div class="h-100 w-25 d-inline-block">
-    <div class="accordion vh-100 overflow-auto">
-      <div class="card">
-        <div class="card-header">
-          <p class="h5 btn-card">{{_('Grammar specification')}}</p>
+<div class="vh-100 d-flex">
+    <div class="vh-100 w-25 d-inline-block">
+        <div class="accordion vh-100 overflow-auto">
+            <div class="card">
+                <div class="card-header">
+                    <p class="h5 btn-card">{{_('grammar_specification_title')}}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button
+                                class="btn btn-link btn-block btn-card text-left"
+                                type="button"
+                                data-toggle="collapse"
+                                href="#variables"
+                                aria-expanded="true"
+                                aria-controls="variables"
+                        >
+                            {{_('variables_title')}}
+                        </button>
+                    </h2>
+                </div>
+                <div class="collapse show multi-collapse" id="variables">
+                    <div class="card-body">
+                        <span>{{_('declare_var_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('declare_var')}}</pre>
+                        <span>{{_('set_var_symbolic_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('set_var_symbolic_int')}}
+{{_('set_var_symbolic_var')}}
+{{_('set_var_symbolic_string')}}
+{{_('set_var_symbolic_tuple')}}
+{{_('set_var_symbolic_list')}}
+{{_('set_var_symbolic_dict')}}
+{{_('set_var_symbolic_set')}}</pre>
+                        <span>{{_('set_var_natural_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('set_var_natural_int')}}
+{{_('set_var_natural_var')}}
+{{_('set_var_natural_string')}}
+{{_('set_var_natural_tuple')}}
+{{_('set_var_natural_list')}}
+{{_('set_var_natural_dict')}}
+{{_('set_var_natural_set')}}</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button
+                                class="btn btn-link btn-block btn-card text-left"
+                                type="button"
+                                data-toggle="collapse"
+                                href="#arith_ops"
+                                aria-expanded="true"
+                                aria-controls="arith_ops"
+                        >
+                            {{_('arith_title')}}
+                        </button>
+                    </h2>
+                </div>
+                <div class="collapse multi-collapse" id="arith_ops">
+                    <div class="card-body">
+                        <span>{{_('arith_symbolic_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('arith_symbolic_add')}}
+{{_('arith_symbolic_sub')}}
+{{_('arith_symbolic_minus')}}
+{{_('arith_symbolic_mul')}}
+{{_('arith_symbolic_div')}}
+{{_('arith_symbolic_mod')}}
+{{_('arith_symbolic_pow')}}
+{{_('arith_symbolic_floor')}}</pre>
+                        <span>{{_('arith_natural_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('arith_natural_add')}}
+{{_('arith_natural_sub')}}
+{{_('arith_natural_minus')}}
+{{_('arith_natural_mul')}}
+{{_('arith_natural_div')}}
+{{_('arith_natural_mod')}}
+{{_('arith_natural_pow')}}</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button
+                                class="btn btn-link btn-block btn-card text-left"
+                                type="button"
+                                data-toggle="collapse"
+                                href="#comp_ops"
+                                aria-expanded="false"
+                                aria-controls="comp_ops"
+                        >
+                            {{_('comp_title')}}
+                        </button>
+                    </h2>
+                </div>
+                <div class="collapse multi-collapse" id="comp_ops">
+                    <div class="card-body">
+                        <span>{{_('comp_symbolic_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('comp_symbolic_leq')}}
+{{_('comp_symbolic_lt')}}
+{{_('comp_symbolic_geq')}}
+{{_('comp_symbolic_gt')}}
+{{_('comp_symbolic_eq')}}
+{{_('comp_symbolic_neq')}}</pre>
+                        <span>{{_('comp_natural_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('comp_natural_leq')}}
+{{_('comp_natural_lt')}}
+{{_('comp_natural_geq')}}
+{{_('comp_natural_gt')}}
+{{_('comp_natural_eq')}}
+{{_('comp_natural_neq')}}</pre>
+                        <span>{{_('is_natural_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('comp_natural_is')}}
+{{_('comp_natural_isnot')}}</pre>
+                        <span>{{_('in_natural_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('comp_natural_in')}}
+{{_('comp_natural_notin')}}</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button
+                                class="btn btn-link btn-block btn-card text-left"
+                                type="button"
+                                data-toggle="collapse"
+                                href="#bool_ops"
+                                aria-expanded="false"
+                                aria-controls="bool_ops"
+                        >
+                            {{_('bool_title')}}
+                        </button>
+                    </h2>
+                </div>
+                <div class="collapse multi-collapse" id="bool_ops">
+                    <div class="card-body">
+                        <span>{{_('bool_value_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('bool_value_True')}}
+{{_('bool_value_False')}}</pre>
+                        <span>{{_('bool_ops_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('bool_operator_and')}}
+{{_('bool_operator_or')}}
+{{_('bool_operator_not')}}</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button
+                                class="btn btn-link btn-block btn-card text-left"
+                                type="button"
+                                data-toggle="collapse"
+                                href="#control_structures"
+                                aria-expanded="false"
+                                aria-controls="control_structures"
+                        >
+                            {{_('control_structure_title')}}
+                        </button>
+                    </h2>
+                </div>
+                <div class="collapse multi-collapse" id="control_structures">
+                    <div class="card-body">
+                        <span>{{_('if_stmt_span')}}</span>
+                        <pre class="bg-dark text-white">{{_('if_stmt')}}</pre>
+                        <span>{{_('for_stmt_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('for_range_stmt')}}
+{{_('for_in_stmt')}}</pre>
+                        <span>{{_('while_stmt_span')}}</span>
+                        <pre class="bg-dark text-white">{{_('while_stmt')}}</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button
+                                class="btn btn-link btn-block btn-card text-left"
+                                type="button"
+                                data-toggle="collapse"
+                                href="#functions"
+                                aria-expanded="true"
+                                aria-controls="functions"
+                        >
+                            {{_('functions_title')}}
+                        </button>
+                    </h2>
+                </div>
+                <div class="collapse multi-collapse" id="functions">
+                    <div class="card-body">
+                        <span>{{_('print_func_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('print_func_statement')}}</pre>
+                        <span>{{_('input_func_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('input_function')}}
+{{_('input_int_function')}}
+{{_('input_float_function')}}</pre>
+                        <span>{{_('declare_func_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('declare_function_no_parameter')}}
+{{_('declare_function_parameters')}}
+{{_('declare_function_return')}}
+{{_('declare_function_parameters_return')}}</pre>
+                        <span>{{_('call_func_span')}}</span>
+                        <pre class="bg-dark text-white">
+{{_('call_function_no_parameter')}}
+{{_('call_function_parameters')}}</pre>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <h2 class="mb-0">
-            <button
-              class="btn btn-link btn-block btn-card text-left"
-              type="button"
-              data-toggle="collapse"
-              href="#variables"
-              aria-expanded="true"
-              aria-controls="variables"
-            >
-              {{_('Variables')}}
-            </button>
-          </h2>
-        </div>
-        <div class="collapse show multi-collapse" id="variables">
-          <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper enim in gravida dictum. Morbi dapibus sodales dolor vel venenatis. Donec ornare porttitor ligula, sit amet vehicula felis fermentum et. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas vitae lectus gravida, pellentesque metus vel, volutpat arcu. Cras mi lorem, scelerisque sed dapibus ac, convallis ac arcu. In tempus sit amet dolor eget ornare. Sed quis enim dignissim, ornare nulla non, malesuada urna. Suspendisse laoreet ipsum placerat turpis dictum, eget commodo nulla auctor. Etiam id massa sit amet augue convallis egestas. Vestibulum eu eros metus. In hac habitasse platea dictumst. Sed eu risus egestas, laoreet risus ut, viverra magna. Praesent fringilla, libero posuere pharetra elementum, risus ligula rhoncus nulla, sed accumsan felis neque sit amet nisl.
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <h2 class="mb-0">
-            <button
-              class="btn btn-link btn-block btn-card text-left"
-              type="button"
-              data-toggle="collapse"
-              href="#data_structures"
-              aria-expanded="true"
-              aria-controls="data_structures"
-            >
-              {{_('Data structures')}}
-            </button>
-          </h2>
-        </div>
-        <div class="collapse show multi-collapse" id="data_structures">
-          <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper enim in gravida dictum. Morbi dapibus sodales dolor vel venenatis. Donec ornare porttitor ligula, sit amet vehicula felis fermentum et. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas vitae lectus gravida, pellentesque metus vel, volutpat arcu. Cras mi lorem, scelerisque sed dapibus ac, convallis ac arcu. In tempus sit amet dolor eget ornare. Sed quis enim dignissim, ornare nulla non, malesuada urna. Suspendisse laoreet ipsum placerat turpis dictum, eget commodo nulla auctor. Etiam id massa sit amet augue convallis egestas. Vestibulum eu eros metus. In hac habitasse platea dictumst. Sed eu risus egestas, laoreet risus ut, viverra magna. Praesent fringilla, libero posuere pharetra elementum, risus ligula rhoncus nulla, sed accumsan felis neque sit amet nisl.
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <h2 class="mb-0">
-            <button
-              class="btn btn-link btn-block btn-card text-left"
-              type="button"
-              data-toggle="collapse"
-              href="#maths"
-              aria-expanded="true"
-              aria-controls="maths"
-            >
-              {{_('Maths')}}
-            </button>
-          </h2>
-        </div>
-        <div class="collapse show multi-collapse" id="maths">
-          <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper enim in gravida dictum. Morbi dapibus sodales dolor vel venenatis. Donec ornare porttitor ligula, sit amet vehicula felis fermentum et. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas vitae lectus gravida, pellentesque metus vel, volutpat arcu. Cras mi lorem, scelerisque sed dapibus ac, convallis ac arcu. In tempus sit amet dolor eget ornare. Sed quis enim dignissim, ornare nulla non, malesuada urna. Suspendisse laoreet ipsum placerat turpis dictum, eget commodo nulla auctor. Etiam id massa sit amet augue convallis egestas. Vestibulum eu eros metus. In hac habitasse platea dictumst. Sed eu risus egestas, laoreet risus ut, viverra magna. Praesent fringilla, libero posuere pharetra elementum, risus ligula rhoncus nulla, sed accumsan felis neque sit amet nisl.
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <h2 class="mb-0">
-            <button
-              class="btn btn-link btn-block btn-card text-left"
-              type="button"
-              data-toggle="collapse"
-              href="#control_structures"
-              aria-expanded="true"
-              aria-controls="control_structures"
-            >
-              {{_('Control Structures')}}
-            </button>
-          </h2>
-        </div>
-        <div class="collapse show multi-collapse" id="control_structures">
-          <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper enim in gravida dictum. Morbi dapibus sodales dolor vel venenatis. Donec ornare porttitor ligula, sit amet vehicula felis fermentum et. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas vitae lectus gravida, pellentesque metus vel, volutpat arcu. Cras mi lorem, scelerisque sed dapibus ac, convallis ac arcu. In tempus sit amet dolor eget ornare. Sed quis enim dignissim, ornare nulla non, malesuada urna. Suspendisse laoreet ipsum placerat turpis dictum, eget commodo nulla auctor. Etiam id massa sit amet augue convallis egestas. Vestibulum eu eros metus. In hac habitasse platea dictumst. Sed eu risus egestas, laoreet risus ut, viverra magna. Praesent fringilla, libero posuere pharetra elementum, risus ligula rhoncus nulla, sed accumsan felis neque sit amet nisl.
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <h2 class="mb-0">
-            <button
-              class="btn btn-link btn-block btn-card text-left"
-              type="button"
-              data-toggle="collapse"
-              href="#functions"
-              aria-expanded="true"
-              aria-controls="functions"
-            >
-              {{_('Functions')}}
-            </button>
-          </h2>
-        </div>
-        <div class="collapse show multi-collapse" id="functions">
-          <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper enim in gravida dictum. Morbi dapibus sodales dolor vel venenatis. Donec ornare porttitor ligula, sit amet vehicula felis fermentum et. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas vitae lectus gravida, pellentesque metus vel, volutpat arcu. Cras mi lorem, scelerisque sed dapibus ac, convallis ac arcu. In tempus sit amet dolor eget ornare. Sed quis enim dignissim, ornare nulla non, malesuada urna. Suspendisse laoreet ipsum placerat turpis dictum, eget commodo nulla auctor. Etiam id massa sit amet augue convallis egestas. Vestibulum eu eros metus. In hac habitasse platea dictumst. Sed eu risus egestas, laoreet risus ut, viverra magna. Praesent fringilla, libero posuere pharetra elementum, risus ligula rhoncus nulla, sed accumsan felis neque sit amet nisl.
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="editor h-100 w075 d-inline-block">World</div>
+    <div class="vh-100 w-75 d-inline-block container editor mx-auto">
+        <div class="row">
+            <div class="code-input col border border-dark mx-2" id="editor-pseudocode"></div>
+            <div class="code-input col border border-dark mx-2" id="editor-python"></div>
+        </div>
+        <div class="text-center d-inline-block w-100">
+            <button class="btn button btn-primary mt-4">{{_('convert_button')}}</button>
+        </div>
+    </div>
 </div>
+<script>
+  // TODO: Use Ace to create syntax highlighting with pseudocode (but this will necessitate to have one file for each language
+  let editorPseudocode = ace.edit("editor-pseudocode");
+  editorPseudocode.setTheme("ace/theme/github");
+  editorPseudocode.session.setMode("ace/mode/python");
+  let editorPython = ace.edit("editor-python");
+  editorPython.setTheme("ace/theme/github");
+  editorPython.session.setMode("ace/mode/python");
+</script>
 {% endblock %}

@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
     height: 100%;
 }
 
@@ -26,4 +25,12 @@ body {
 p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+}
+
+.editor {
+    padding-top: 0.75rem;
+}
+
+.code-input {
+    height: 400px;
 }

@@ -1,29 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}{{_('Home')}}{% endblock %}
+{% block title %}{{_('home_title')}}{% endblock %}
 {% block content %}
 <div class="body-content">
   <div class="App-body">
-    <h3>{{_('Why did we develop PseuToPy?')}}</h3>
+    <h3>{{_('home_h3_why_pseutopy')}}</h3>
     <p>
-      {{_('Learning to program is difficult. There are lots of concepts and skills to learn before even writing a small simple program. And once these concepts are understood, they need to be applied using a programming language which also need to be learned.')}}
+      {{_('home_why_pseutopy_div1')}}
     </p>
     <p>
-      {{_('A programming language, just like any natural language, has its own words and grammar. Programming instructions can be regarded as sentences that the developer will use to speak to the machine.')}}
-      <b>{{_('A limiting aspect of most popular programming languages is that they are all using English words.')}}</b>
-      {{_('As a consequence, non-English speakers can find it even harder to learn these languages as they are manipulating tokens that do not necessarily make any sense to them.')}}
+      {{_('home_why_pseutopy_div2')}}
     </p>
     <p>
-      {{_('We have thus developed PseuToPy to allow non-English speakers to get introduced to programming in their own native languages. PseuToPy defines pseudocode-based programming languages in several languages with the objective of making PseuToPy-based instructions as natural as possible.')}}
+      {{_('home_why_pseutopy_div3')}}
     </p>
-    <h3>{{_('How does PseuToPy work?')}}</h3>
+    <h3>{{_('home_h3_how_pseutopy')}}</h3>
     <p>
-      {{_('PseuToPy uses')}} <a href="http://textx.github.io/textX/">textX</a> {{_('to define pseudocode grammars in several languages so that non-native English can write basic instructions when learning to program. textX also provides tools to parse instructions based on the provided grammar which results in generating an abstract syntax tree of these instructions that is equivalent to a Python AST. Finally, we use')}}
-      <a href="https://astor.readthedocs.io/en/latest/">astor</a> {{_('to generate the equivalent Python instructions.')}}
+      {{_('home_how_pseutopy_div1')}}
     </p>
-    <p>{{_('More information will come as we develop more main features...')}}</p>
+    <p>{{_('home_how_pseutopy_div2')}}</p>
     <p>
-      {{_('PseuToPy is developed under the MIT license. The source code can be found on')}} <a href="https://github.com/PseuToPy/PseuToPy-app">GitHub</a>, {{_('and it is mainly developed and maintained by')}}
-      <a href="https://patrickwang.fr">Patrick Wang</a>.
+        {{_('home_how_pseutopy_div3')}}
     </p>
   </div>
 </div>

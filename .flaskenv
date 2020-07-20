@@ -1,1 +1,1 @@
-FLASK_APP=pseutopy/app
+FLASK_APP=src/app

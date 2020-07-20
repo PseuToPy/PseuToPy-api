@@ -1,1 +1,1 @@
-web: gunicorn pseutopy.app:app
+web: gunicorn src.app:app

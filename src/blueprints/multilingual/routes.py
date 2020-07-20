@@ -1,12 +1,8 @@
-from flask import render_template, Blueprint, g, redirect, request, current_app, \
-    url_for
+from flask import render_template, Blueprint, g, request, current_app
 from flask_babel import _
-from werkzeug.exceptions import BadRequest
 
-from pseutopy import app
-
-multilingual = Blueprint('multilingual', __name__,
-                         template_folder='templates', url_prefix='/<lang_code>')
+multilingual = Blueprint('multilingual', __name__, template_folder='templates',
+                         url_prefix='/<lang_code>')
 
 
 @multilingual.url_defaults
@@ -30,7 +26,7 @@ def editor():
 
 
 @multilingual.route('/error404')
-def page_not_found():
+def  page_not_found():
     return render_template('multilingual/error404.html', title=_('Error404'))
 
 

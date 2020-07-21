@@ -278,7 +278,9 @@
            errorDiv.innerText = {{_("request_too_long")}};
          }
      }
-     httpRequest.open('POST', 'http://localhost:5000/convert', true);
+     let url = window.location.protocol + "//" + window.location.hostname + ":" +
+             window.location.port + "/convert";
+     httpRequest.open('POST', url, true);
      httpRequest.setRequestHeader('Content-Type', 'application/json');
      // Method send() should have the parameters of the POST request as argument
    let params;

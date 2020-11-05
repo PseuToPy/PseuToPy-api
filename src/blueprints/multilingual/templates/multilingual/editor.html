@@ -242,7 +242,13 @@
         </div>
         <div class="text-center d-inline-block w-100">
             <div class="mt-4" id="errorMessage"></div>
-            <button class="btn button btn-primary mt-4" onclick="convert()">{{_('convert_button')}}</button>
+            <button class="btn button btn-primary my-3" onclick="convert()">{{_('convert_button')}}</button>
+            <button class="btn button btn-primary my-3" onclick="runit()">Run</button>
+        </div>
+        <div class="row">
+            <div class="code-input col border border-dark mx-2" id="editor-execution"
+                 disabled aria-disabled>
+            </div>
         </div>
     </div>
 </div>
@@ -254,6 +260,11 @@
  editorPython.setTheme("ace/theme/github");
  editorPython.session.setMode("ace/mode/python");
  editorPython.setReadOnly(true);
+/**/
+ let editorExecution = ace.edit("editor-execution");
+ editorExecution.setTheme("ace/theme/github");
+ editorExecution.session.setMode("ace/mode/python");
+ editorExecution.setReadOnly(true);
 
  function convert() {
    let errorDiv = document.getElementById("errorMessage");
@@ -296,6 +307,56 @@
      httpRequest.send(JSON.stringify(params));
    }
  }
+
+ //Being executed twice for some reason
+ //Print output of Python code to screen
+ function outputExecution(text) {
+        //let output = document.getElementById("editor-execution");
+        //output.innerHTML+= text;
+
+        if(!text || /^\s*$/.test(text)){
+            editorExecution.setValue(editorExecution.getValue() + "\n");
+            //alert("Empty: ");
+        } else{
+            editorExecution.setValue(editorExecution.getValue() + text);
+            //alert("True: " + text);
+        }
+    }
+
+    function builtinRead(x) {
+        if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+            throw "File not found: '" + x + "'";
+        return Sk.builtinFiles["files"][x];
+    }
+
+    function runit() {
+
+        let prog = ""
+        prog = editorPython.getValue();
+        /*
+        $('#editor-python').find('.ace_line').each(function(){
+            //alert($(this).text())
+            if ($(this).text() !== "" ) {
+              prog += $(this).text() +"\n";
+            }
+        });
+        */
+
+        editorExecution.setValue("");
+        Sk.pre = "output";
+        Sk.configure({output: outputExecution, read: builtinRead , inputfunTakesPrompt: true});
+
+
+        var myPromise = Sk.misceval.asyncToPromise(function () {
+            return Sk.importMainWithBody("<stdin>", false, prog, true);
+        });
+        myPromise.then(function (mod) {
+            console.log('success');
+        },
+        function (err) {
+            console.log(err.toString());
+        });
+    }
 
 </script>
 {% endblock %}

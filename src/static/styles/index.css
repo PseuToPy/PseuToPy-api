@@ -34,3 +34,7 @@ p {
 .code-input {
     height: 250px;
 }
+
+.execution-input {
+    height: 20px;
+}

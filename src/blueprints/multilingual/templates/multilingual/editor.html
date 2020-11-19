@@ -246,9 +246,16 @@
             <button class="btn button btn-primary my-3" onclick="runit()">Run</button>
         </div>
         <div class="row">
+            <div class="execution-input col border border-dark mx-2" id="editor-execution-input-text"
+                 disabled aria-disabled>INPUT AREA BELOW</div>
+        </div>
+        <div class="row">
+            <div class="execution-input col border border-dark mx-2" id="editor-execution-input"
+             disabled aria-disabled></div>
+        </div>
+        <div class="row">
             <div class="code-input col border border-dark mx-2" id="editor-execution"
-                 disabled aria-disabled>
-            </div>
+                 disabled aria-disabled></div>
         </div>
     </div>
 </div>
@@ -260,11 +267,33 @@
  editorPython.setTheme("ace/theme/github");
  editorPython.session.setMode("ace/mode/python");
  editorPython.setReadOnly(true);
-/**/
+
+//Input Text (Prompt Message)
+  let editorExecutionInputText = ace.edit("editor-execution-input-text");
+ editorExecutionInputText.setTheme("ace/theme/github");
+ editorExecutionInputText.session.setMode("ace/mode/python");
+ editorExecutionInputText.setReadOnly(true);
+ editorExecutionInputText.setOption("showGutter", false);
+ editorExecutionInputText.setHighlightActiveLine(false);
+
+  //User Input For Execution
+ let editorExecutionInput = ace.edit("editor-execution-input");
+ editorExecutionInput.setTheme("ace/theme/github");
+ editorExecutionInput.session.setMode("ace/mode/python");
+ editorExecutionInput.setReadOnly(true);
+ editorExecutionInput.setOption("showGutter", false);
+ //Output
  let editorExecution = ace.edit("editor-execution");
  editorExecution.setTheme("ace/theme/github");
  editorExecution.session.setMode("ace/mode/python");
  editorExecution.setReadOnly(true);
+ editorExecution.setOption("showGutter", false);
+ editorExecution.setHighlightActiveLine(false);
+
+
+
+
+
 
  function convert() {
    let errorDiv = document.getElementById("errorMessage");
@@ -308,55 +337,67 @@
    }
  }
 
- //Being executed twice for some reason
  //Print output of Python code to screen
- function outputExecution(text) {
-        //let output = document.getElementById("editor-execution");
-        //output.innerHTML+= text;
+ function printExecution(text) {
 
-        if(!text || /^\s*$/.test(text)){
-            editorExecution.setValue(editorExecution.getValue() + "\n");
-            //alert("Empty: ");
-        } else{
-            editorExecution.setValue(editorExecution.getValue() + text);
-            //alert("True: " + text);
-        }
+    //Shift to next line if text empty
+    if(!text || /^\s*$/.test(text)){
+        editorExecution.setValue(editorExecution.getValue() + "\n");
+    } else{
+        editorExecution.setValue(editorExecution.getValue() + text);
     }
+}
 
-    function builtinRead(x) {
+function builtinRead(x) {
         if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
             throw "File not found: '" + x + "'";
         return Sk.builtinFiles["files"][x];
     }
 
-    function runit() {
+function runit() {
 
-        let prog = ""
-        prog = editorPython.getValue();
-        /*
-        $('#editor-python').find('.ace_line').each(function(){
-            //alert($(this).text())
-            if ($(this).text() !== "" ) {
-              prog += $(this).text() +"\n";
-            }
-        });
-        */
+    let prog = ""
+    prog = editorPython.getValue();
 
-        editorExecution.setValue("");
-        Sk.pre = "output";
-        Sk.configure({output: outputExecution, read: builtinRead , inputfunTakesPrompt: true});
+    editorExecution.setValue("");
+    Sk.pre = editorExecution;
+    Sk.configure({output: printExecution, read: builtinRead , inputfunTakesPrompt: true,
+        inputfun: function (prompt) {
+          editorExecutionInputText.setValue(prompt);
+          editorExecutionInput.setReadOnly(false);
+          editorExecutionInput.focus();
+
+          return new Promise(function (resolve, reject) {
+            //Take input when 'Enter' key pressed
+            $("#editor-execution-input").on("keyup", function (e) {
+              if (e.keyCode == 13) {
+                $("#editor-execution-input").off("keyup");
+
+                const input = " " + $.trim(editorExecutionInput.getValue());
+                printExecution(prompt + input + "\n");
+                //Reset after input taken
+                editorExecutionInput.setValue("");
+                editorExecutionInputText.setValue("Input Area Below");
+                editorExecutionInput.setReadOnly(true);
+                resolve(input);
+              }
+            });
+          });
+        }
+
+    });
 
 
-        var myPromise = Sk.misceval.asyncToPromise(function () {
-            return Sk.importMainWithBody("<stdin>", false, prog, true);
-        });
-        myPromise.then(function (mod) {
-            console.log('success');
-        },
-        function (err) {
-            console.log(err.toString());
-        });
-    }
+    var myPromise = Sk.misceval.asyncToPromise(function () {
+        return Sk.importMainWithBody("<stdin>", false, prog, true);
+    });
+    myPromise.then(function (mod) {
+        console.log('success');
+    },
+    function (err) {
+        console.log(err.toString());
+    });
+}
 
 </script>
 {% endblock %}

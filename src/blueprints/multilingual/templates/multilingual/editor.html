@@ -247,7 +247,7 @@
         </div>
         <div class="row">
             <div class="execution-input col border border-dark mx-2" id="editor-execution-input-text"
-                 disabled aria-disabled>INPUT AREA BELOW</div>
+                 disabled aria-disabled></div>
         </div>
         <div class="row">
             <div class="execution-input col border border-dark mx-2" id="editor-execution-input"
@@ -377,7 +377,7 @@ function runit() {
                 printExecution(prompt + input + "\n");
                 //Reset after input taken
                 editorExecutionInput.setValue("");
-                editorExecutionInputText.setValue("Input Area Below");
+                editorExecutionInputText.setValue("");
                 editorExecutionInput.setReadOnly(true);
                 resolve(input);
               }

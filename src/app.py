@@ -1,4 +1,4 @@
-from flask import Flask, request, g, redirect, url_for, render_template, jsonify
+from flask import Flask, request, g, redirect, url_for, render_template, jsonify, session
 from flask_cors import CORS, cross_origin
 from flask_babel import Babel, _
 from werkzeug.exceptions import HTTPException
@@ -6,8 +6,13 @@ from werkzeug.debug import DebuggedApplication
 from pseutopy.pseutopy import PseuToPy
 import astor
 
-
+# For Logging
+import secrets
+import psycopg2
+from config import config
+from datetime import datetime
 from config import Config
+
 # import and register blueprints
 from src.blueprints.multilingual import multilingual
 
@@ -17,7 +22,6 @@ app.config.from_object(Config)
 app.register_blueprint(multilingual)
 if app.debug:
     app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
-
 
 cors = CORS(app)
 babel = Babel(app)
@@ -56,10 +60,60 @@ def convert():
             python_instructions = astor.to_source(python_ast)
             return jsonify(status=0, response=python_instructions)
         except Exception:
-            return jsonify(status=1, response= _("Pseudocode parsing error"))
+            return jsonify(status=1, response=_("Pseudocode parsing error"))
     else:
         return jsonify(status=1, response=_("Convert error"))
 
+
+@app.route('/log/documentation', methods=['POST'])
+def log_doc():
+    print("REQUEST\n\n" + str(request.get_json()))
+    data = request.get_json()
+    if data['status'] == 0:
+        specification = data['specification']
+        expanded = data['expanded']
+        timestamp = datetime.utcnow()
+        session_id = secrets.token_urlsafe(10)
+        try:
+            params = config()
+            conn = psycopg2.connect(**params)
+            with conn:
+                with conn.cursor() as cursor:
+                    cursor.execute(
+                        "CREATE TABLE IF NOT EXISTS documentation_viewed (session_id VARCHAR PRIMARY KEY, specification VARCHAR, expanded BOOLEAN , interacted_at TIMESTAMP);")
+                    cursor.execute(
+                        "INSERT INTO documentation_viewed (session_id, specification, expanded, interacted_at) VALUES(%s, %s, %s, %s)",
+                        (session_id, specification, expanded, timestamp,))
+                    return jsonify(status=1, response=_("Data logged at" + str(timestamp)))
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+    else:
+        return jsonify(status=1, response=_("Error logging!"))
+
+@app.route('/log/input', methods=['POST'])
+def log_input():
+    print("REQUEST\n\n" + str(request.get_json()))
+    data = request.get_json()
+    if data['status'] == 0:
+        specification = data['specification']
+        expanded = data['expanded']
+        timestamp = datetime.utcnow()
+        session_id = secrets.token_urlsafe(10)
+        try:
+            params = config()
+            conn = psycopg2.connect(**params)
+            with conn:
+                with conn.cursor() as cursor:
+                    cursor.execute(
+                        "CREATE TABLE IF NOT EXISTS documentation_viewed (session_id VARCHAR PRIMARY KEY, specification VARCHAR, expanded BOOLEAN , interacted_at TIMESTAMP);")
+                    cursor.execute(
+                        "INSERT INTO documentation_viewed (session_id, specification, expanded, interacted_at) VALUES(%s, %s, %s, %s)",
+                        (session_id, specification, expanded, timestamp,))
+                    return jsonify(status=1, response=_("Data logged at" + str(timestamp)))
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+    else:
+        return jsonify(status=1, response=_("Error logging!"))
 
 @app.errorhandler(HTTPException)
 def http_error_handler(e):

@@ -265,13 +265,16 @@
                     if (httpRequest.status === 200) {
                         let response = JSON.parse(httpRequest.responseText);
                         if (response.status === 0) {
-                            //successful conversion - Log to db
+                            //successful conversion - Logging to db
+                            logConvert(true, pseudocode)
                             editorPython.setValue(response.response, 1);
                             errorDiv.innerText = ""
                         } else {
-                            //Unsuccessful conversion - Log to db
+                            //Unsuccessful conversion - Logging to db
+                            logConvert(false, pseudocode)
 
                             // The PseuToPy translation has failed probably due to error in parsing
+                            //Can log this as well when errors are implemented
                             errorDiv.innerText = response.response.toString();
                         }
                     } else {
@@ -302,27 +305,12 @@
         }
 
 
-        //Logging user interaction
+        //Logging functions
 
-
-        /*
-        let httpRequest = new XMLHttpRequest();
-        let url = window.location.protocol + "//" + window.location.hostname + ":" +
-            window.location.port + "/log";
-        httpRequest.open('POST', url, true);
-        httpRequest.setRequestHeader('Content-Type', 'application/json');
-        let params = {
-            "specification" : ,
-            "expanded" :
-        };
-        httpRequest.send(JSON.stringify(params))
-        */
-
-        //Detect Documentation expanded/closed
+        //Log Documentation being expanded/closed
         $('.btn-link').on('click', function (event) {
 
             var documentation = (event.target.attributes.href.nodeValue);
-
             documentation = documentation.replace('#', '');
 
             //Have to save opposite as ariaExpanded value returned is the new value after click
@@ -342,16 +330,42 @@
                 "specification": documentation,
                 "expanded": expanded
             };
+            console.log(params)
             httpRequest.send(JSON.stringify(params))
-
-            //console.log("Expanded = " + expanded );
         });
 
-        //Detect change in textarea/editor
+        //Log change in textarea/editor
         editorPseudocode.session.on('change', function (delta) {
-            //console.log(editorPseudocode.getValue());
+            const text = editorPseudocode.getValue();
+            let httpRequest = new XMLHttpRequest();
+            let url = window.location.protocol + "//" + window.location.hostname + ":" +
+                window.location.port + "/log/input";
+            httpRequest.open('POST', url, true);
+            httpRequest.setRequestHeader('Content-Type', 'application/json');
+            let params = {
+                "status" : 0,
+                "text": text
+            };
+            console.log(params)
+            httpRequest.send(JSON.stringify(params))
         });
 
+        //Logs whether conversion was successful or not
+        function logConvert(successful, pseudocode){
+
+            let httpRequest = new XMLHttpRequest();
+            let url = window.location.protocol + "//" + window.location.hostname + ":" +
+                window.location.port + "/log/convert";
+            httpRequest.open('POST', url, true);
+            httpRequest.setRequestHeader('Content-Type', 'application/json');
+            let params = {
+                "status" : 0,
+                "pseudocode": pseudocode.toString(),
+                "successful": successful
+            };
+            console.log(params)
+            httpRequest.send(JSON.stringify(params))
+        }
         /*
        //User's click
        $(document).click(function(event) {

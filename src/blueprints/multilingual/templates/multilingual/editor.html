@@ -270,27 +270,24 @@
 
 //Input Text (Prompt Message)
   let editorExecutionInputText = ace.edit("editor-execution-input-text");
- editorExecutionInputText.setTheme("ace/theme/github");
+ editorExecutionInputText.setTheme("ace/theme/dreamWeaver");
  editorExecutionInputText.session.setMode("ace/mode/python");
  editorExecutionInputText.setReadOnly(true);
  editorExecutionInputText.setOption("showGutter", false);
  editorExecutionInputText.setHighlightActiveLine(false);
-
   //User Input For Execution
  let editorExecutionInput = ace.edit("editor-execution-input");
- editorExecutionInput.setTheme("ace/theme/github");
+ editorExecutionInput.setTheme("ace/theme/dreamWeaver");
  editorExecutionInput.session.setMode("ace/mode/python");
  editorExecutionInput.setReadOnly(true);
  editorExecutionInput.setOption("showGutter", false);
- //Output
+ //Python Execution Output
  let editorExecution = ace.edit("editor-execution");
  editorExecution.setTheme("ace/theme/github");
  editorExecution.session.setMode("ace/mode/python");
  editorExecution.setReadOnly(true);
  editorExecution.setOption("showGutter", false);
  editorExecution.setHighlightActiveLine(false);
-
-
 
 
 
@@ -337,10 +334,10 @@
    }
  }
 
- //Print output of Python code to screen
+ //Prints output of Python code to textarea
  function printExecution(text) {
 
-    //Shift to next line if text empty
+    //Shift to next line if text empty (as empty string passed instead of '\n')
     if(!text || /^\s*$/.test(text)){
         editorExecution.setValue(editorExecution.getValue() + "\n");
     } else{
@@ -348,34 +345,49 @@
     }
 }
 
+//default read Function (No need to modify)
 function builtinRead(x) {
         if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
             throw "File not found: '" + x + "'";
         return Sk.builtinFiles["files"][x];
     }
 
+ //Execute python code (Main Function)
 function runit() {
 
+     //Retrieve python code from editor
     let prog = ""
     prog = editorPython.getValue();
 
+    //Clear execution textarea and pass reference variable to it to Skulpt
     editorExecution.setValue("");
     Sk.pre = editorExecution;
+
+    //Configure Skulpt processing (pass the print,read and input functions here)
     Sk.configure({output: printExecution, read: builtinRead , inputfunTakesPrompt: true,
+
+        //Custom input function - Prompt is the text passed in the input function
         inputfun: function (prompt) {
+
+        //Sets the prompt message
           editorExecutionInputText.setValue(prompt);
+          //Disables readOnly for input area and focuses cursor to it
           editorExecutionInput.setReadOnly(false);
           editorExecutionInput.focus();
 
+          //Can implement reject as well to allow user to cancel execution (ESC? key)
           return new Promise(function (resolve, reject) {
-            //Take input when 'Enter' key pressed
+            //Detect 'Enter' key pressed (end of input)
             $("#editor-execution-input").on("keyup", function (e) {
               if (e.keyCode == 13) {
                 $("#editor-execution-input").off("keyup");
 
+                //Trims user input from textarea
                 const input = " " + $.trim(editorExecutionInput.getValue());
+                //Pass the prompt message and user input to print function to simulate console
                 printExecution(prompt + input + "\n");
-                //Reset after input taken
+
+                //Resets textareas after input taken and switches back to readonly in input textarea
                 editorExecutionInput.setValue("");
                 editorExecutionInputText.setValue("{{_('execution_input_text')}}");
                 editorExecutionInput.setReadOnly(true);
@@ -387,7 +399,7 @@ function runit() {
 
     });
 
-
+    //Skulpt default functions (No modifications here)
     var myPromise = Sk.misceval.asyncToPromise(function () {
         return Sk.importMainWithBody("<stdin>", false, prog, true);
     });

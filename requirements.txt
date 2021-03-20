@@ -7,7 +7,7 @@ Flask-Babel==1.0.0
 Flask-Cors==3.0.8
 gunicorn==20.0.4
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 pseutopy==2.0.2
 python-dotenv==0.13.0

@@ -41,7 +41,7 @@ def convert_code(language):
         python_instructions = convert(instructions, chosen_lang)
         return jsonify(code=python_instructions, language=chosen_lang, message="Converted successfully!"), http_ok
     except PseutopyParsingException as e:
-        return jsonify(code="", language=chosen_lang, message="{}".format(e)), UnprocessableEntity.code
+        return jsonify(code=[], language=chosen_lang, message="{}".format(e)), UnprocessableEntity.code
     except:
         return "Internal server error", InternalServerError.code
 

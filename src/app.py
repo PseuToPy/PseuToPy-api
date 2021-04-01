@@ -6,6 +6,7 @@ from werkzeug.debug import DebuggedApplication
 from config import Config
 
 from .services.convert import convert, PseutopyParsingException
+from .services.grammar import get_grammar, MalformedJsonException
 from .util.http import HttpStatus
 
 # set up application
@@ -36,9 +37,22 @@ def convert_code(language):
     chosen_lang = get_language(language)
     try:
         python_instructions = convert(instructions, chosen_lang)
-        return jsonify(code=python_instructions, language=chosen_lang), HttpStatus.OK
+        return jsonify(code=python_instructions, language=chosen_lang, message="Converted successfully!"), HttpStatus.OK
     except PseutopyParsingException as e:
-        return jsonify(code="", language=chosen_lang, error="{}".format(e)), HttpStatus.UNPROCESSABLE_ENTITY
+        return jsonify(code="", language=chosen_lang, message="{}".format(e)), HttpStatus.UNPROCESSABLE_ENTITY
+
+@app.route('/grammar/<string:language>', methods=['GET'])
+@cross_origin()
+def fetch_grammar(language):
+    chosen_lang = get_language(language)
+    try:
+        return jsonify(get_grammar(chosen_lang)), 200
+    except FileNotFoundError as fnfErr:
+        return "{}".format(fnfErr), HttpStatus.INTERNAL_SERVER_ERROR
+    except MalformedJsonException as mjErr:
+        return "{}".format(mjErr), HttpStatus.INTERNAL_SERVER_ERROR
+    except:
+        return "Internal server error", HttpStatus.INTERNAL_SERVER_ERROR
 
 # @app.errorhandler(HTTPException)
 # def http_error_handler(e):

@@ -1,13 +1,14 @@
-from flask import Flask, request, g, redirect, url_for, render_template, jsonify
+from flask import Flask, request, redirect, url_for, jsonify
 from flask_cors import CORS, cross_origin
-from flask_babel import Babel, _
-from werkzeug.exceptions import HTTPException
+from werkzeug.exceptions import BadRequest, UnprocessableEntity, NotFound, InternalServerError
 from werkzeug.debug import DebuggedApplication
 from config import Config
 
 from .services.convert import convert, PseutopyParsingException
 from .services.grammar import get_grammar, MalformedJsonException
-from .util.http import HttpStatus
+from .services.metadata import get_metadata
+
+http_ok = 200
 
 # set up application
 app = Flask(__name__)
@@ -16,7 +17,6 @@ if app.debug:
     app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
 
 cors = CORS(app)
-babel = Babel(app)
 
 def get_language(language):
     if language in app.config['LANGUAGES']:
@@ -24,36 +24,44 @@ def get_language(language):
     return "en"
 
 @app.route('/')
-def home():
-    return redirect(url_for('multilingual.index'))
+def metadata():
+    (pythonVersion, pseutopyVersion, pseutopyTargetGrammar) = get_metadata()
+    return jsonify(pythonVersion=pythonVersion, pseutopyVersion=pseutopyVersion,
+                   pseutopyTargetGrammar=pseutopyTargetGrammar), http_ok
 
 @app.route('/convert/<string:language>', methods=['POST'])
 @cross_origin()
 def convert_code(language):
     params = request.get_json()
-    if((params is None) or (params['instructions'] is None)):
-        return "Missing parameter 'instructions'", HttpStatus.BAD_REQUEST
+    if((params is None) or ('instructions' not in params)):
+        return "Missing parameter 'instructions'", BadRequest.code
     instructions = params['instructions']
     chosen_lang = get_language(language)
     try:
         python_instructions = convert(instructions, chosen_lang)
-        return jsonify(code=python_instructions, language=chosen_lang, message="Converted successfully!"), HttpStatus.OK
+        return jsonify(code=python_instructions, language=chosen_lang, message="Converted successfully!"), http_ok
     except PseutopyParsingException as e:
-        return jsonify(code="", language=chosen_lang, message="{}".format(e)), HttpStatus.UNPROCESSABLE_ENTITY
+        return jsonify(code="", language=chosen_lang, message="{}".format(e)), UnprocessableEntity.code
+    except:
+        return "Internal server error", InternalServerError.code
 
 @app.route('/grammar/<string:language>', methods=['GET'])
 @cross_origin()
 def fetch_grammar(language):
     chosen_lang = get_language(language)
     try:
-        return jsonify(get_grammar(chosen_lang)), 200
+        return jsonify(get_grammar(chosen_lang)), http_ok
     except FileNotFoundError as fnfErr:
-        return "{}".format(fnfErr), HttpStatus.INTERNAL_SERVER_ERROR
+        return "{}".format(fnfErr), InternalServerError.code
     except MalformedJsonException as mjErr:
-        return "{}".format(mjErr), HttpStatus.INTERNAL_SERVER_ERROR
+        return "{}".format(mjErr), InternalServerError.code
     except:
-        return "Internal server error", HttpStatus.INTERNAL_SERVER_ERROR
+        return "Internal server error", InternalServerError.code
 
-# @app.errorhandler(HTTPException)
-# def http_error_handler(e):
-#     return render_template('error404.html')
+@app.errorhandler(NotFound)
+def http_not_found_handler(e):
+    return "{}".format(e)
+
+@app.errorhandler(InternalServerError)
+def http_internal_error_handler(e):
+    return "{}".format(e)

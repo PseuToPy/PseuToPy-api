@@ -110,7 +110,7 @@
         "category": "Opérateurs Booléens",
         "rules": [
             {
-                "rule": "Valeurs Booléenne",
+                "rule": "Valeurs Booléennes",
                 "samples": [
                     "set my_var to true",
                     "set my_var to True",
@@ -157,7 +157,7 @@
         "category": "Fonctions",
         "rules": [
             {
-                "rule": "Fonction d'affichage en console (les paranthèses sont optionnelles)",
+                "rule": "Fonction d'affichage en console (les parenthèses sont optionnelles)",
                 "samples": [
                     "print(\"Hello\")",
                     "display(\"A message\", \"And another one\")",
@@ -165,7 +165,7 @@
                 ]
             },
             {
-                "rule": "Paramètre d'entrée d'une fonction (les paranthèses sont optionnelles)",
+                "rule": "Paramètre d'entrée d'une fonction (les parenthèses sont optionnelles)",
                 "samples": [
                     "set my_var to the result of input(\"This is a message to prompt the input\")",
                     "set my_var to the result of input \"A message\", \"Another message\"",
@@ -174,7 +174,7 @@
                 ]
             },
             {
-                "rule": "Déclarer une fonction (les paranthèses sont optionnelles pour les arguments)",
+                "rule": "Déclarer une fonction (les parenthèses sont optionnelles pour les arguments)",
                 "samples": [
                     "define function foo with no parameter: \n set my_var to 1 \n end",
                     "define function foo with arg1 as parameter: \n set my_var to arg1 \n end",
@@ -184,7 +184,7 @@
                 ]
             },
             {
-                "rule": "Appeler une fonction (les paranthèses sont optionnelles)",
+                "rule": "Appeler une fonction (les parenthèses sont optionnelles)",
                 "samples": [
                     "call function foo \n set my_var to the result of call function foo",
                     "call function bar with parameter 1 \n set my_var to the result of call function bar with parameter 1",

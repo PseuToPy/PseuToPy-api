@@ -1,22 +1,22 @@
-import os
+from os.path import join, exists, dirname, normpath
 import json
 
-dirname = os.path.dirname(__file__)
+parent_path = dirname(__file__)
 translation_path = "../translations/{}/grammar.json"
 
 class MalformedJsonException(Exception):
     pass
 
 def get_grammar(language):
-    file_path = os.path.join(dirname, translation_path.format(language))
-
-    if(os.path.exists(file_path)):
+    file_path = normpath(join(parent_path, translation_path.format(language)))
+    print(file_path)
+    if(exists(file_path)):
         file = open(file_path, 'r', encoding="utf8")
         file_txt = file.read()
         try:
             return json.loads(file_txt)
         except ValueError as err:
-            raise MalformedJsonException(err)
+            raise MalformedJsonException("JSON file {} is malformed: {}".format(file_path, err))
         finally:
             file.close()
     else:

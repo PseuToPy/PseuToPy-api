@@ -1,0 +1,196 @@
+[
+    {
+        "category": "Variables",
+        "rules": [
+            {
+                "rule": "Déclarer une variable",
+                "samples": [
+                    "declare my_var"
+                ]
+            },
+            {
+                "rule": "Assigner une valeur à une variable (manière symbolique)",
+                "samples": [
+                    "my_var = 1",
+                    "my_var1 = my_var2",
+                    "my_var = \"Hello\"",
+                    "my_tuple = (1, my_var, \"Hi\")",
+                    "my_list = [1, my_var, \"Hi\"]",
+                    "my_dict = {\"key1\": 1, 2: \"value\"}",
+                    "my_set = {1, 2, 3}"
+                ]
+            },
+            {
+                "rule": "Assigner une valeur à une variable (manière naturelle)",
+                "samples": [
+                    "set my_var to 1",
+                    "set my_var1 to my_var2",
+                    "set my_var to \"Hello\"",
+                    "set my_tuple to (1, my_var, \"Hi\")",
+                    "set my_list to [1, my_var, \"Hi\"]",
+                    "set my_dict to {\"key1\": 1, 2: \"value\"}",
+                    "set my_set to {1, 2, 3}"
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Opérateurs Arithmétiques",
+        "rules": [
+            {
+                "rule": "Opérateurs Arithmétiques (manière symbolique)",
+                "samples": [
+                    "my_var = 1 + 2",
+                    "my_var = 1 - 2",
+                    "my_var = -4",
+                    "my_var = 2 * 3",
+                    "my_var = 2 / 3",
+                    "my_var = 2 % 3",
+                    "my_var = 2 ** 3",
+                    "my_var = 2 // 3"
+                ]
+            },
+            {
+                "rule": "Opérateurs Arithmétiques (manière naturelle)",
+                "samples": [
+                    "set my_var to 1 plus 2",
+                    "set my_var to 1 minus 2",
+                    "set my_var to minus 4",
+                    "set my_var to 2 times 3",
+                    "set my_var to 2 divided by 3",
+                    "set my_var to 2 modulo 3",
+                    "set my_var to 2 to the power of 3"
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Opérateurs de comparaison",
+        "rules": [
+            {
+                "rule": "Opérateurs de comparaison (manière symbolique)",
+                "samples": [
+                    "my_var = 2 <= 3",
+                    "my_var = 2 < 3",
+                    "my_var = 2 >= 3",
+                    "my_var = 2 > 3",
+                    "my_var = 2 == 3",
+                    "my_Var = 2 != 3"
+                ]
+            },
+            {
+                "rule": "Opérateurs de comparaison (manière naturelle)",
+                "samples": [
+                    "set my_var to 2 is lower or equal to 3",
+                    "set my_var to 2 is lower than 3",
+                    "set my_var to 2 is greater or equal to 3",
+                    "set my_var to 2 is greater than 3",
+                    "set my_var to 2 is equal to 3",
+                    "set my_var to 2 is different from 3",
+                    "set my_var to 2 is not equal to 3"
+                ]
+            },
+            {
+                "rule": "Opérateur avec is",
+                "samples": [
+                    "set my_var to a is b",
+                    "set my_var to a is not b"
+                ]
+            },
+            {
+                "rule": "Opérateur avec in",
+                "samples": [
+                    "set my_var to 3 in my_tuple",
+                    "set my_var to 3 not in my_list"
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Opérateurs Booléens",
+        "rules": [
+            {
+                "rule": "Valeurs Booléennes",
+                "samples": [
+                    "set my_var to true",
+                    "set my_var to True",
+                    "set my_var to false",
+                    "set my_var to False"
+                ]
+            },
+            {
+                "rule": "Opérateurs Booléens",
+                "samples": [
+                    "set my_var to true and false",
+                    "set my_var to true or false",
+                    "set my_var to not true"
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Boucle de contrôle",
+        "rules": [
+            {
+                "rule": "Boucle If (allows either \":\", \"then\", or \"then:\")",
+                "samples": [
+                    "if true or false: \n set my_var = \"Some random value\" \n end",
+                    "if true then: \n set my_var = \"Some random value\" \n else then \n set my_var = \"Some other random value\" \n end"
+                ]
+            },
+            {
+                "rule": "Boucle For (allows either \":\", \"do\", or \"do:\")",
+                "samples": [
+                    "for i in range(0, 10, 1): \n set a to i \n end",
+                    "for i in (1, 2, 3, 5, 7) do: \n set a to i \n end"
+                ]
+            },
+            {
+                "rule": "Boucle While (allows either \":\", \"do\", or \"do:\")",
+                "samples": [
+                    "while true do: \n set a to 1 \n end"
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Fonctions",
+        "rules": [
+            {
+                "rule": "Fonction d'affichage en console (les parenthèses sont optionnelles)",
+                "samples": [
+                    "print(\"Hello\")",
+                    "display(\"A message\", \"And another one\")",
+                    "show(\"Hello\", 1, my_var)"
+                ]
+            },
+            {
+                "rule": "Paramètre d'entrée d'une fonction (les parenthèses sont optionnelles)",
+                "samples": [
+                    "set my_var to the result of input(\"This is a message to prompt the input\")",
+                    "set my_var to the result of input \"A message\", \"Another message\"",
+                    "set my_var to the result of input integer \"my_var will try to be an integer\"",
+                    "set my_var to the result of input number \"my_var will try to be a float\""
+                ]
+            },
+            {
+                "rule": "Déclarer une fonction (les parenthèses sont optionnelles pour les arguments)",
+                "samples": [
+                    "define function foo with no parameter: \n set my_var to 1 \n end",
+                    "define function foo with arg1 as parameter: \n set my_var to arg1 \n end",
+                    "define function bar with (arg1, arg2) as parameters: \n set my_var1 to arg1 \n set my_var2 to arg2 \n end",
+                    "define function foo: \n return true \n end",
+                    "define function bar with (arg1, arg2) as parameters: \n set my_var1 to arg1 \n set my_var2 to arg2 \n return my_var1, my_var2 \n end"
+                ]
+            },
+            {
+                "rule": "Appeler une fonction (les parenthèses sont optionnelles)",
+                "samples": [
+                    "call function foo \n set my_var to the result of call function foo",
+                    "call function bar with parameter 1 \n set my_var to the result of call function bar with parameter 1",
+                    "call function bar with parameters (1, 2) \n set my_var to the result of call function bar with parameters (1, 2)"
+                ]
+            }
+        ]
+    }
+]

@@ -3,7 +3,7 @@
         "category": "Variables",
         "rules": [
             {
-                "rule": "Declarer une variable",
+                "rule": "Déclarer une variable",
                 "samples": [
                     "declare my_var"
                 ]

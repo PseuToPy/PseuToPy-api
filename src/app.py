@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from werkzeug.exceptions import BadRequest, UnprocessableEntity, NotFound, InternalServerError
 from werkzeug.debug import DebuggedApplication

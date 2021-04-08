@@ -17,10 +17,6 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        pip3 install pytest
         if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
-    - name: Test with pytest
-      run: |
-        pytest
     - name: Deploy
       run: at now +1 minutes -f .github/workflows/deploy_api.sh

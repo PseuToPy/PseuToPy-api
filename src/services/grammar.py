@@ -9,7 +9,6 @@ class MalformedJsonException(Exception):
 
 def get_grammar(language):
     file_path = normpath(join(parent_path, translation_path.format(language)))
-    print(file_path)
     if(exists(file_path)):
         file = open(file_path, 'r', encoding="utf8")
         file_txt = file.read()

@@ -4,7 +4,7 @@ from werkzeug.exceptions import BadRequest, UnprocessableEntity, NotFound, Inter
 from werkzeug.debug import DebuggedApplication
 from config import Config
 
-from .services.convert import convert, PseutopyParsingException
+from .services.convert import convert
 from .services.grammar import get_grammar, MalformedJsonException
 from .services.metadata import get_metadata
 
@@ -38,11 +38,9 @@ def convert_code(language):
     instructions = params['instructions']
     chosen_lang = get_language(language)
     try:
-        python_instructions = convert(instructions, chosen_lang)
-        return jsonify(code=python_instructions, language=chosen_lang, message="Converted successfully!"), http_ok
-    except PseutopyParsingException as e:
-        return jsonify(code=[], language=chosen_lang, message="{}".format(e)), UnprocessableEntity.code
-    except:
+        python_instructions, status, message = convert(instructions, chosen_lang)
+        return jsonify(code=python_instructions, language=chosen_lang, status=status.value, message=message), http_ok
+    except Exception as e:
         return "Internal server error", InternalServerError.code
 
 @app.route('/grammar/<string:language>', methods=['GET'])

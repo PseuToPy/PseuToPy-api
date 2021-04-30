@@ -134,21 +134,21 @@
             {
                 "rule": "Boucle If (allows either \":\", \"then\", or \"then:\")",
                 "samples": [
-                    "if true or false: \n set my_var = \"Some random value\" \n end",
-                    "if true then: \n set my_var = \"Some random value\" \n else then \n set my_var = \"Some other random value\" \n end"
+                    "if true or false:\nset my_var = \"Some random value\"\nend",
+                    "if true then:\nset my_var = \"Some random value\"\nelse then\nset my_var = \"Some other random value\"\nend"
                 ]
             },
             {
                 "rule": "Boucle For (allows either \":\", \"do\", or \"do:\")",
                 "samples": [
-                    "for i in range(0, 10, 1): \n set a to i \n end",
-                    "for i in (1, 2, 3, 5, 7) do: \n set a to i \n end"
+                    "for i in range(0, 10, 1):\nset a to i\nend",
+                    "for i in (1, 2, 3, 5, 7) do:\nset a to i\nend"
                 ]
             },
             {
                 "rule": "Boucle While (allows either \":\", \"do\", or \"do:\")",
                 "samples": [
-                    "while true do: \n set a to 1 \n end"
+                    "while true do:\nset a to 1\nend"
                 ]
             }
         ]
@@ -176,19 +176,19 @@
             {
                 "rule": "Déclarer une fonction (les parenthèses sont optionnelles pour les arguments)",
                 "samples": [
-                    "define function foo with no parameter: \n set my_var to 1 \n end",
-                    "define function foo with arg1 as parameter: \n set my_var to arg1 \n end",
-                    "define function bar with (arg1, arg2) as parameters: \n set my_var1 to arg1 \n set my_var2 to arg2 \n end",
-                    "define function foo: \n return true \n end",
-                    "define function bar with (arg1, arg2) as parameters: \n set my_var1 to arg1 \n set my_var2 to arg2 \n return my_var1, my_var2 \n end"
+                    "define function foo with no parameter:\nset my_var to 1\nend",
+                    "define function foo with arg1 as parameter:\nset my_var to arg1\nend",
+                    "define function bar with (arg1, arg2) as parameters:\nset my_var1 to arg1\nset my_var2 to arg2\nend",
+                    "define function foo:\nreturn true\nend",
+                    "define function bar with (arg1, arg2) as parameters:\nset my_var1 to arg1\nset my_var2 to arg2\nreturn my_var1, my_var2\nend"
                 ]
             },
             {
                 "rule": "Appeler une fonction (les parenthèses sont optionnelles)",
                 "samples": [
-                    "call function foo \n set my_var to the result of call function foo",
-                    "call function bar with parameter 1 \n set my_var to the result of call function bar with parameter 1",
-                    "call function bar with parameters (1, 2) \n set my_var to the result of call function bar with parameters (1, 2)"
+                    "call function foo\nset my_var to the result of call function foo",
+                    "call function bar with parameter 1\nset my_var to the result of call function bar with parameter 1",
+                    "call function bar with parameters (1, 2)\nset my_var to the result of call function bar with parameters (1, 2)"
                 ]
             }
         ]

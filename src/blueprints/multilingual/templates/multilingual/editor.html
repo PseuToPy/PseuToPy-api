@@ -241,8 +241,21 @@
                  aria-disabled></div>
         </div>
         <div class="text-center d-inline-block w-100">
-            <div class="mt-4" id="errorMessage"></div>
-            <button class="btn button btn-primary mt-4" onclick="convert()">{{_('convert_button')}}</button>
+            <div class="mt-3" id="errorMessage"></div>
+            <button class="btn button btn-primary my-3" onclick="convert()">{{_('convert_button')}}</button>
+            <button class="btn button btn-primary my-3" onclick="runit()">{{_('execute_button')}}</button>
+        </div>
+        <div class="row">
+            <div class="execution-input col border border-dark mx-2" id="editor-execution-input-text"
+                 disabled aria-disabled>{{_('execution_input_text')}}</div>
+        </div>
+        <div class="row">
+            <div class="execution-input col border border-dark mx-2 mb-3" id="editor-execution-input"
+             disabled aria-disabled></div>
+        </div>
+        <div class="row">
+            <div class="code-input col border border-dark mx-2" id="editor-execution"
+                 disabled aria-disabled></div>
         </div>
     </div>
 </div>
@@ -254,6 +267,30 @@
  editorPython.setTheme("ace/theme/github");
  editorPython.session.setMode("ace/mode/python");
  editorPython.setReadOnly(true);
+
+//Input Text (Prompt Message)
+  let editorExecutionInputText = ace.edit("editor-execution-input-text");
+ editorExecutionInputText.setTheme("ace/theme/dreamWeaver");
+ editorExecutionInputText.session.setMode("ace/mode/python");
+ editorExecutionInputText.setReadOnly(true);
+ editorExecutionInputText.setOption("showGutter", false);
+ editorExecutionInputText.setHighlightActiveLine(false);
+  //User Input For Execution
+ let editorExecutionInput = ace.edit("editor-execution-input");
+ editorExecutionInput.setTheme("ace/theme/dreamWeaver");
+ editorExecutionInput.session.setMode("ace/mode/python");
+ editorExecutionInput.setReadOnly(true);
+ editorExecutionInput.setOption("showGutter", false);
+ //Python Execution Output
+ let editorExecution = ace.edit("editor-execution");
+ editorExecution.setTheme("ace/theme/github");
+ editorExecution.session.setMode("ace/mode/python");
+ editorExecution.setReadOnly(true);
+ editorExecution.setOption("showGutter", false);
+ editorExecution.setHighlightActiveLine(false);
+
+
+
 
  function convert() {
    let errorDiv = document.getElementById("errorMessage");
@@ -296,6 +333,83 @@
      httpRequest.send(JSON.stringify(params));
    }
  }
+
+ //Prints output of Python code to textarea
+ function printExecution(text) {
+
+    //Shift to next line if text empty (as empty string passed instead of '\n')
+    if(!text || /^\s*$/.test(text)){
+        editorExecution.setValue(editorExecution.getValue() + "\n");
+    } else{
+        editorExecution.setValue(editorExecution.getValue() + text);
+    }
+}
+
+//default read Function (No need to modify)
+function builtinRead(x) {
+        if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+            throw "File not found: '" + x + "'";
+        return Sk.builtinFiles["files"][x];
+    }
+
+ //Execute python code (Main Function)
+function runit() {
+
+     //Retrieve python code from editor
+    let prog = ""
+    prog = editorPython.getValue();
+
+    //Clear execution textarea and pass reference variable to it to Skulpt
+    editorExecution.setValue("");
+    Sk.pre = editorExecution;
+
+    //Configure Skulpt processing (pass the print,read and input functions here)
+    Sk.configure({output: printExecution, read: builtinRead , inputfunTakesPrompt: true,
+
+        //Custom input function - Prompt is the text passed in the input function
+        inputfun: function (prompt) {
+
+        //Sets the prompt message
+          editorExecutionInputText.setValue(prompt);
+          //Disables readOnly for input area and focuses cursor to it
+          editorExecutionInput.setReadOnly(false);
+          editorExecutionInput.focus();
+
+          //Can implement reject as well to allow user to cancel execution (ESC? key)
+          return new Promise(function (resolve, reject) {
+            //Detect 'Enter' key pressed (end of input)
+            $("#editor-execution-input").on("keyup", function (e) {
+              if (e.keyCode == 13) {
+                $("#editor-execution-input").off("keyup");
+
+                //Trims user input from textarea
+                const input = " " + $.trim(editorExecutionInput.getValue());
+                //Pass the prompt message and user input to print function to simulate console
+                printExecution(prompt + input + "\n");
+
+                //Resets textareas after input taken and switches back to readonly in input textarea
+                editorExecutionInput.setValue("");
+                editorExecutionInputText.setValue("{{_('execution_input_text')}}");
+                editorExecutionInput.setReadOnly(true);
+                resolve(input);
+              }
+            });
+          });
+        }
+
+    });
+
+    //Skulpt default functions (No modifications here)
+    var myPromise = Sk.misceval.asyncToPromise(function () {
+        return Sk.importMainWithBody("<stdin>", false, prog, true);
+    });
+    myPromise.then(function (mod) {
+        console.log('success');
+    },
+    function (err) {
+        console.log(err.toString());
+    });
+}
 
 </script>
 {% endblock %}

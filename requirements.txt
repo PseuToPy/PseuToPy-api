@@ -1,13 +1,10 @@
 Arpeggio==1.9.2
 astor==0.8.1
-Babel==2.8.0
 Click==7.0
 Flask==1.1.2
-Flask-Babel==1.0.0
 Flask-Cors==3.0.8
 gunicorn==20.0.4
 itsdangerous==1.1.0
-Jinja2==2.11.2
 MarkupSafe==1.1.1
 pseutopy==2.0.2
 python-dotenv==0.13.0

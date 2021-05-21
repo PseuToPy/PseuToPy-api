@@ -132,21 +132,21 @@
         "category": "Boucle de contrôle",
         "rules": [
             {
-                "rule": "Boucle If (allows either \":\", \"then\", or \"then:\")",
+                "rule": "Boucle If (syntaxe \":\", \"then\", ou \"then:\" autorisée)",
                 "samples": [
                     "if true or false:\rset my_var = \"Some random value\"\rend",
                     "if true then:\rset my_var = \"Some random value\"\relse then\rset my_var = \"Some other random value\"\rend"
                 ]
             },
             {
-                "rule": "Boucle For (allows either \":\", \"do\", or \"do:\")",
+                "rule": "Boucle For (syntaxe \":\", \"do\", ou \"do:\" autorisée)",
                 "samples": [
                     "for i in range(0, 10, 1):\rset a to i\rend",
                     "for i in (1, 2, 3, 5, 7) do:\rset a to i\rend"
                 ]
             },
             {
-                "rule": "Boucle While (allows either \":\", \"do\", or \"do:\")",
+                "rule": "Boucle While (syntaxe \":\", \"do\", ou \"do:\" autorisée)",
                 "samples": [
                     "while true do:\rset a to 1\rend"
                 ]

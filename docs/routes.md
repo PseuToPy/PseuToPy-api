@@ -78,4 +78,4 @@ Example of returned data (JSON) :
 ```
 
 ## Resources
-A Postman collection with 3 request examples is available on GitHub at [docs/resources/PseuToPy.postman_collection.json](https://github.com/PseuToPy/PseuToPy-api/new/rtd/docs/resources/PseuToPy.postman_collection.json "PseuToPy.postman_collection.json").
+A Postman collection with 3 request examples is available on GitHub at [docs/resources/PseuToPy.postman_collection.json](https://github.com/PseuToPy/PseuToPy-api/blob/rtd/docs/resources/PseuToPy.postman_collection.json "PseuToPy.postman_collection.json").

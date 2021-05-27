@@ -10,8 +10,9 @@ class ConversionStatus(Enum):
 
 def convert(instructions, language):
     try:
+        print(instructions)
         python_ast = pseutopy.convert_from_string(instructions)
         python_instructions = astor.to_source(python_ast)
         return python_instructions.rstrip(), ConversionStatus.SUCCESS, "Converted successfully!"
     except Exception as e:
-        return [], ConversionStatus.ERROR, "{}".format(e)
+        return "", ConversionStatus.ERROR, "{}".format(e)

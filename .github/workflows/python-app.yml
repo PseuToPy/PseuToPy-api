@@ -10,14 +10,15 @@ on:
     branches: [ master, dev ]
 
 jobs:
-  build:
-
+  install:
     runs-on: self-hosted
-
     steps:
     - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
+    - run: |
         if [ -f requirements.txt ]; then pip3.8 install -r requirements.txt; fi
-    - name: Deploy
-      run: at now +1 minutes -f .github/workflows/deploy_api.sh
+      
+  deploy:
+    runs-on: self-hosted
+    needs: [install]
+    steps:
+      - run: at now +1 minutes -f .github/workflows/deploy_api.sh

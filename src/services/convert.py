@@ -1,8 +1,5 @@
-from pseutopy.pseutopy import PseuToPy
-import astor
+from pseutopy import pseutopy 
 from enum import Enum
-
-pseutopy = PseuToPy()
 
 class ConversionStatus(Enum):
     SUCCESS = "SUCCESS"
@@ -11,8 +8,9 @@ class ConversionStatus(Enum):
 def convert(instructions, language):
     try:
         print(instructions)
-        python_ast = pseutopy.convert_from_string(instructions)
-        python_instructions = astor.to_source(python_ast)
-        return python_instructions.rstrip(), ConversionStatus.SUCCESS, "Converted successfully!"
+        r = pseutopy.PseuToPy(language).convert_from_string(instructions)
+        if r == "An error occured: Unable to parse the input. Please check that your input is correct.":
+            return "", ConversionStatus.ERROR, "{}".format(e)
+        return r, ConversionStatus.SUCCESS, "Converted successfully!"
     except Exception as e:
         return "", ConversionStatus.ERROR, "{}".format(e)

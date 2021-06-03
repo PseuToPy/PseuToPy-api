@@ -3,12 +3,6 @@
         "category": "Variables",
         "rules": [
             {
-                "rule": "Declare a variable",
-                "samples": [
-                    "declare my_var"
-                ]
-            },
-            {
                 "rule": "Assign a value to a variable (symbolic way)",
                 "samples": [
                     "my_var = 1",
@@ -134,21 +128,21 @@
             {
                 "rule": "If statements (allows either \":\", \"then\", or \"then:\")",
                 "samples": [
-                    "if true or false:\rset my_var = \"Some random value\"\rend", 
-                    "if true then:\rset my_var = \"Some random value\"\relse then\rset my_var = \"Some other random value\"\rend"
+                    "if true or false:\r\tset my_var = \"Some random value\"", 
+                    "if true then:\r\tset my_var = \"Some random value\"\r\telse then\r\tset my_var = \"Some other random value\""
                 ]
             },
             {
                 "rule": "For statements (allows either \":\", \"do\", or \"do:\")",
                 "samples": [
-                    "for i in range(0, 10, 1):\rset a to i\rend",
-                    "for i in (1, 2, 3, 5, 7) do:\rset a to i\rend"
+                    "for i in range(0, 10, 1):\r\tset a to i",
+                    "for i in (1, 2, 3, 5, 7) do:\r\tset a to i"
                 ]
             },
             {
                 "rule": "While statements (allows either \":\", \"do\", or \"do:\")",
                 "samples": [
-                    "while true do:\rset a to 1\rend"
+                    "while true do:\r\tset a to 1"
                 ]
             }
         ]
@@ -157,38 +151,21 @@
         "category": "Functions",
         "rules": [
             {
-                "rule": "Print function (parentheses are optional)",
+                "rule": "Declare a function",
                 "samples": [
-                    "print(\"Hello\")",
-                    "display(\"A message\", \"And another one\")",
-                    "show(\"Hello\", 1, my_var)"
-                ]
-            },
-            {
-                "rule": "Input function (parentheses are optional)",
-                "samples": [
-                    "set my_var to the result of input(\"This is a message to prompt the input\")",
-                    "set my_var to the result of input \"A message\", \"Another message\"",
-                    "set my_var to the result of input integer \"my_var will try to be an integer\"",
-                    "set my_var to the result of input number \"my_var will try to be a float\""
-                ]
-            },
-            {
-                "rule": "Declare a function (parentheses are optional for arguments)",
-                "samples": [
-                    "define function foo with no parameter:\rset my_var to 1\rend",
-                    "define function foo with arg1 as parameter:\rset my_var to arg1\rend",
-                    "define function bar with (arg1, arg2) as parameters:\rset my_var1 to arg1\rset my_var2 to arg2\rend",
-                    "define function foo:\rreturn true\rend",
-                    "define function bar with (arg1, arg2) as parameters:\rset my_var1 to arg1\rset my_var2 to arg2\rreturn my_var1, my_var2\rend"
+                    "define function foo():\rset my_var to 1\rend",
+                    "define function foo(arg) to do:\r\tset my_var to arg",
+                    "define function bar(arg1, arg2) to do\r\tset my_var1 to arg1\r\tset my_var2 to arg2",
+                    "define function foo():\r\treturn true",
+                    "define function bar(arg1, arg2):\r\tset my_var1 to arg1\r\tset my_var2 to arg2\r\treturn my_var1, my_var2"
                 ]
             },
             {
                 "rule": "Call a function (parentheses are optional)",
                 "samples": [
-                    "call function foo\rset my_var to the result of call function foo",
-                    "call function bar with parameter 1\rset my_var to the result of call function bar with parameter 1",
-                    "call function bar with parameters (1, 2)\rset my_var to the result of call function bar with parameters (1, 2)"
+                    "foo()",
+                    "foo(a, b=true)",
+                    "foo(1, b, c=None)"
                 ]
             }
         ]

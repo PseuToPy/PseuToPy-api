@@ -153,7 +153,7 @@
             {
                 "rule": "Declare a function",
                 "samples": [
-                    "define function foo():\rset my_var to 1\rend",
+                    "define function foo():\r\tset my_var to 1",
                     "define function foo(arg) to do:\r\tset my_var to arg",
                     "define function bar(arg1, arg2) to do\r\tset my_var1 to arg1\r\tset my_var2 to arg2",
                     "define function foo():\r\treturn true",

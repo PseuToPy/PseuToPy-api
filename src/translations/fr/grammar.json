@@ -5,25 +5,25 @@
             {
                 "rule": "Assigner une valeur à une variable (manière symbolique)",
                 "samples": [
-                    "my_var = 1",
-                    "my_var1 = my_var2",
-                    "my_var = \"Bonjour\"",
-                    "my_tuple = (1, my_var, \"Bonjour\")",
-                    "my_list = [1, my_var, \"Bonjour\"]",
-                    "my_dict = {\"cle\": 1, 2: \"valeur\"}",
-                    "my_set = {1, 2, 3}"
+                    "ma_variable = 1",
+                    "ma_variable1 = ma_variable2",
+                    "ma_variable = \"Bonjour\"",
+                    "mon_tuple = (1, ma_variable, \"Bonjour\")",
+                    "ma_liste = [1, ma_variable, \"Bonjour\"]",
+                    "mon_dictionnaire = {\"cle\": 1, 2: \"valeur\"}",
+                    "mon_ensemble = {1, 2, 3}"
                 ]
             },
             {
                 "rule": "Assigner une valeur à une variable (manière naturelle)",
                 "samples": [
-                    "mettre my_var à 1",
-                    "mettre my_var à my_var2",
-                    "mettre my_var à \"Bonjour\"",
-                    "mettre my_tuple à (1, my_var, \"Bonjour\")",
-                    "mettre my_list à [1, my_var, \"Bonjour\"]",
-                    "mettre my_dict à {\"cle\": 1, 2: \"valeur\"}",
-                    "mettre my_set à {1, 2, 3}"
+                    "mettre ma_variable à 1",
+                    "mettre ma_variable à ma_variable2",
+                    "mettre ma_variable à \"Bonjour\"",
+                    "mettre mon_tuple à (1, ma_variable, \"Bonjour\")",
+                    "mettre ma_liste à [1, ma_variable, \"Bonjour\"]",
+                    "mettre mon_dictionnaire à {\"cle\": 1, 2: \"valeur\"}",
+                    "mettre mon_ensemble à {1, 2, 3}"
                 ]
             }
         ]
@@ -34,26 +34,26 @@
             {
                 "rule": "Opérateurs Arithmétiques (manière symbolique)",
                 "samples": [
-                    "my_var = 1 + 2",
-                    "my_var = 1 - 2",
-                    "my_var = -4",
-                    "my_var = 2 * 3",
-                    "my_var = 2 / 3",
-                    "my_var = 2 % 3",
-                    "my_var = 2 ** 3",
-                    "my_var = 2 // 3"
+                    "ma_variable = 1 + 2",
+                    "ma_variable = 1 - 2",
+                    "ma_variable = -4",
+                    "ma_variable = 2 * 3",
+                    "ma_variable = 2 / 3",
+                    "ma_variable = 2 % 3",
+                    "ma_variable = 2 ** 3",
+                    "ma_variable = 2 // 3"
                 ]
             },
             {
                 "rule": "Opérateurs Arithmétiques (manière naturelle)",
                 "samples": [
-                    "mettre my_var à 1 plus 2",
-                    "mettre my_var à 1 moins 2",
-                    "mettre my_var à moins 4",
-                    "mettre my_var à 2 fois 3",
-                    "mettre my_var à 2 divisé par 3",
-                    "mettre my_var à 2 modulo 3",
-                    "mettre my_var à 2 puissance 3"
+                    "mettre ma_variable à 1 plus 2",
+                    "mettre ma_variable à 1 moins 2",
+                    "mettre ma_variable à moins 4",
+                    "mettre ma_variable à 2 fois 3",
+                    "mettre ma_variable à 2 divisé par 3",
+                    "mettre ma_variable à 2 modulo 3",
+                    "mettre ma_variable à 2 puissance 3"
                 ]
             }
         ]
@@ -64,38 +64,38 @@
             {
                 "rule": "Opérateurs de comparaison (manière symbolique)",
                 "samples": [
-                    "my_var = 2 <= 3",
-                    "my_var = 2 < 3",
-                    "my_var = 2 >= 3",
-                    "my_var = 2 > 3",
-                    "my_var = 2 == 3",
-                    "my_var = 2 != 3"
+                    "ma_variable = 2 <= 3",
+                    "ma_variable = 2 < 3",
+                    "ma_variable = 2 >= 3",
+                    "ma_variable = 2 > 3",
+                    "ma_variable = 2 == 3",
+                    "ma_variable = 2 != 3"
                 ]
             },
             {
                 "rule": "Opérateurs de comparaison (manière naturelle)",
                 "samples": [
-                    "mettre my_var à 2 est inférieur ou égal à 3",
-                    "mettre my_var à 2 est inférieur à 3",
-                    "mettre my_var à 2 est supérieur ou égal à 3",
-                    "mettre my_var à 2 est supérieur à 3",
-                    "mettre my_var à 2 est égal à 3",
-                    "mettre my_var à 2 est différent de 3",
-                    "mettre my_var à 2 n'est pas égal à 3"
+                    "mettre ma_variable à 2 est inférieur ou égal à 3",
+                    "mettre ma_variable à 2 est inférieur à 3",
+                    "mettre ma_variable à 2 est supérieur ou égal à 3",
+                    "mettre ma_variable à 2 est supérieur à 3",
+                    "mettre ma_variable à 2 est égal à 3",
+                    "mettre ma_variable à 2 est différent de 3",
+                    "mettre ma_variable à 2 n'est pas égal à 3"
                 ]
             },
             {
-                "rule": "Opérateur avec is",
+                "rule": "Opérateur avec est",
                 "samples": [
-                    "mettre my_var à a est b",
-                    "mettre my_var à a n'est pas b"
+                    "mettre ma_variable à x est y",
+                    "mettre ma_variable à x n'est pas y"
                 ]
             },
             {
-                "rule": "Opérateur avec in",
+                "rule": "Opérateur avec dans",
                 "samples": [
-                    "mettre my_var à 3 dans my_tuple",
-                    "mettre my_var à 3 pas dans my_list"
+                    "mettre ma_variable à 3 dans mon_tuple",
+                    "mettre ma_variable à 3 pas dans ma_liste"
                 ]
             }
         ]
@@ -106,18 +106,18 @@
             {
                 "rule": "Valeurs Booléennes",
                 "samples": [
-                    "mettre my_var à vrai",
-                    "mettre my_var à Vrai",
-                    "mettre my_var à faux",
-                    "mettre my_var à Faux"
+                    "mettre ma_variable à vrai",
+                    "mettre ma_variable à Vrai",
+                    "mettre ma_variable à faux",
+                    "mettre ma_variable à Faux"
                 ]
             },
             {
                 "rule": "Opérateurs Booléens",
                 "samples": [
-                    "mettre my_var à vrai et faux",
-                    "mettre my_var à vrai ou faux",
-                    "mettre my_var à non vrai"
+                    "mettre ma_variable à vrai et faux",
+                    "mettre ma_variable à vrai ou faux",
+                    "mettre ma_variable à non vrai"
                 ]
             }
         ]
@@ -128,21 +128,21 @@
             {
                 "rule": "Structure conditionnelle (syntaxe \":\", \"alors\", ou \"alors:\" autorisée)",
                 "samples": [
-                    "si vrai ou faux:\r\tmettre my_var à \"Une valeur quelconque\"",
-                    "si vrai alors:\r\tmettre my_var à \"Une valeur quelconque\"\rsinon alors:\r\tmettre my_var à \"Une autre valeur quelconque\""
+                    "si vrai ou faux:\r\tmettre ma_variable à \"Une valeur quelconque\"",
+                    "si vrai alors:\r\tmettre ma_variable à \"Une valeur quelconque\"\rsinon alors:\r\tmettre ma_variable à \"Une autre valeur quelconque\""
                 ]
             },
             {
-                "rule": "Boucle For (syntaxe \":\", \"faire\", ou \"faire:\" autorisée)",
+                "rule": "Boucle pour (syntaxe \":\", \"faire\", ou \"faire:\" autorisée)",
                 "samples": [
-                    "pour i in range(0, 10, 1):\r\tmettre a à i",
-                    "pour i in (1, 2, 3, 5, 7) faire:\r\tmettre a à i"
+                    "pour i dans range(0, 10, 1):\r\tmettre ma_variable à i",
+                    "pour i dans (1, 2, 3, 5, 7) faire:\r\tmettre ma_variable à i"
                 ]
             },
             {
-                "rule": "Boucle While (syntaxe \":\", \"faire\", ou \"faire:\" autorisée)",
+                "rule": "Boucle tant que (syntaxe \":\", \"faire\", ou \"faire:\" autorisée)",
                 "samples": [
-                    "tant que vrai faire:\r\tmettre a à 1"
+                    "tant que vrai faire:\r\tmettre ma_variable à 1"
                 ]
             }
         ]
@@ -153,19 +153,19 @@
             {
                 "rule": "Déclarer une fonction",
                 "samples": [
-                    "définir la fonction foo():\r\tmettre my_var à 1",
-                    "définir la fonction foo(arg):\r\tmettre my_var à arg1",
-                    "définir la fonction bar(arg1, arg2) as parameters:\r\tmettre my_var1 à arg1\r\tmettre my_var2 à arg2",
-                    "définir la fonction foo():\r\treturn vrai",
-                    "définir la fonction bar(arg1, arg2):\r\tmettre my_var1 à arg1\r\tmettre my_var2 à arg2\r\treturn my_var1, my_var2"
+                    "définir la fonction ma_fonction():\r\tmettre ma_variable à 1",
+                    "définir la fonction ma_fonction(arg):\r\tmettre ma_variable à arg1",
+                    "définir la fonction ma_fonction(arg1, arg2) qui fait\r\tmettre ma_variable1 à arg1\r\tmettre ma_variable2 à arg2",
+                    "définir la fonction ma_fonction():\r\tretourner vrai",
+                    "définir la fonction ma_fonction(arg1, arg2):\r\tmettre ma_variable1 à arg1\r\tmettre ma_variable2 à arg2\r\tretourner ma_variable1, ma_variable2"
                 ]
             },
             {
                 "rule": "Appeler une fonction",
                 "samples": [
-                    "foo()",
-                    "foo(a, b=vrai)",
-                    "foo(1, b, c=vide)"
+                    "ma_fonction()",
+                    "ma_fonction(a, b=vrai)",
+                    "ma_fonction(1, b, c=vide)"
                 ]
             }
         ]

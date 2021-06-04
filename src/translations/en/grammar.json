@@ -69,7 +69,7 @@
                     "my_var = 2 >= 3",
                     "my_var = 2 > 3",
                     "my_var = 2 == 3",
-                    "my_Var = 2 != 3"
+                    "my_var = 2 != 3"
                 ]
             },
             {
@@ -128,8 +128,8 @@
             {
                 "rule": "If statements (allows either \":\", \"then\", or \"then:\")",
                 "samples": [
-                    "if true or false:\r\tset my_var = \"Some random value\"", 
-                    "if true then:\r\tset my_var = \"Some random value\"\r\telse then\r\tset my_var = \"Some other random value\""
+                    "if true or false:\r\tset my_var to \"Some random value\"",
+                    "if true then:\r\tset my_var to \"Some random value\"\relse then\r\tset my_var to \"Some other random value\""
                 ]
             },
             {

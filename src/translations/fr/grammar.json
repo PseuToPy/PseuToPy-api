@@ -69,33 +69,33 @@
                     "my_var = 2 >= 3",
                     "my_var = 2 > 3",
                     "my_var = 2 == 3",
-                    "my_Var = 2 != 3"
+                    "my_var = 2 != 3"
                 ]
             },
             {
                 "rule": "Opérateurs de comparaison (manière naturelle)",
                 "samples": [
-                    "set my_var to 2 est inférieur ou égal à 3",
-                    "set my_var to 2 est inférieur à 3",
-                    "set my_var to 2 est supérieur ou égal à 3",
-                    "set my_var to 2 est supérieur à 3",
-                    "set my_var to 2 est égal à 3",
-                    "set my_var to 2 est différent de 3",
-                    "set my_var to 2 n'est pas égal à 3"
+                    "mettre my_var à 2 est inférieur ou égal à 3",
+                    "mettre my_var à 2 est inférieur à 3",
+                    "mettre my_var à 2 est supérieur ou égal à 3",
+                    "mettre my_var à 2 est supérieur à 3",
+                    "mettre my_var à 2 est égal à 3",
+                    "mettre my_var à 2 est différent de 3",
+                    "mettre my_var à 2 n'est pas égal à 3"
                 ]
             },
             {
                 "rule": "Opérateur avec is",
                 "samples": [
-                    "set my_var to a est b",
-                    "set my_var to a n'est pas b"
+                    "mettre my_var à a est b",
+                    "mettre my_var à a n'est pas b"
                 ]
             },
             {
                 "rule": "Opérateur avec in",
                 "samples": [
-                    "set my_var to 3 dans my_tuple",
-                    "set my_var to 3 pas dans my_list"
+                    "mettre my_var à 3 dans my_tuple",
+                    "mettre my_var à 3 pas dans my_list"
                 ]
             }
         ]
@@ -129,7 +129,7 @@
                 "rule": "Structure conditionnelle (syntaxe \":\", \"alors\", ou \"alors:\" autorisée)",
                 "samples": [
                     "si vrai ou faux:\r\tmettre my_var à \"Une valeur quelconque\"",
-                    "si vrai alors:\r\tmettre my_var à \"Une valeur quelconque\"\r\tsinon alors\r\tmettre my_var à \"Une autre valeur quelconque\""
+                    "si vrai alors:\r\tmettre my_var à \"Une valeur quelconque\"\rsinon alors:\r\tmettre my_var à \"Une autre valeur quelconque\""
                 ]
             },
             {

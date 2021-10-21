@@ -1,6 +1,6 @@
 Arpeggio==1.9.2
 astor==0.8.1
-Babel==2.8.0
+Babel==2.9.1
 Click==7.0
 Flask==1.1.2
 Flask-Babel==1.0.0
